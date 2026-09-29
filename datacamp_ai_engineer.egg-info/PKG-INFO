@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: datacamp-ai-engineer
+Version: 0.1.0
+Summary: DataCamp Associate AI Engineer Track
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.2.0
+Requires-Dist: transformers>=4.40.0
+Requires-Dist: datasets>=2.19.0
+Requires-Dist: evaluate>=0.4.0
+Requires-Dist: accelerate>=0.30.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: jupyterlab>=4.1.0
+Requires-Dist: tqdm>=4.66.0

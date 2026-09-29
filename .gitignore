@@ -1,0 +1,35 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDEs
+.idea/
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.local
+
+# ML Datasets, Weights, and Caches
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.onnx
+
+# Hugging Face local cache
+.cache/
+hf_cache/
