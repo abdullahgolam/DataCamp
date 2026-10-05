@@ -17,6 +17,7 @@ __pycache__/
 # Secrets
 .env
 .env.local
+.env.example
 
 # ML Datasets, Weights, and Caches
 data/*
@@ -33,3 +34,6 @@ models/*
 # Hugging Face local cache
 .cache/
 hf_cache/
+
+# pip editable VCS clone (created by `pip install -e git+...` in requirement.txt)
+/src/

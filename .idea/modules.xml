@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DataCamp.iml" filepath="$PROJECT_DIR$/.idea/DataCamp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/datacamp-ai-engineer.iml" filepath="$PROJECT_DIR$/.idea/datacamp-ai-engineer.iml" />
     </modules>
   </component>
 </project>
