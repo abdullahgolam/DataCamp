@@ -7,5 +7,8 @@ response = client.embeddings.create(
     input="Embeddings are a numerical representation of text that can be used to measure the relatedness between two pieces of text.")
 
 
-response_dict = response.model.to_dict()
-print(response_dict)
+response_dict = response.model_dump()
+# print(response_dict)
+
+# extracting the embeddings
+print(response_dict['data'][0]['embedding'])
