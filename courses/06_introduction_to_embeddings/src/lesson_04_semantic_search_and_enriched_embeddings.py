@@ -43,12 +43,11 @@ articles = [
 ]
 
 from pprint import pprint
+from common.helpers import create_embedding, summarize_embeddings
 
 """
 we'll define a function called create_article_text, this function uses an F-string, or formatted string, to return the desired string structure. f-string allow us to insert variables into strings without having to convert them into strings and concatenate them. F-strings are created by specifying on f before the quotes, and note that we've defined a multi-line string using triple quotes. To insert an object, we use curly brackets and specify the variable or other Python code to insert. For the article headline and topic, these values are extracted using their keys and inserted into the string at the desired locations. The keywords are a little trickier because they were stored as a list rather than a string. To convert the keywords list into a string, we use the join list method, which joins the contents of the list together into a single string. The method is called on the string we want to delimit each keyword with, in this case, a comma and space. 
 """
-
-
 def create_article_text(article):
     return f"""
     Headline: {article['headline']}
@@ -60,4 +59,29 @@ def create_article_text(article):
 """
 Calling the function on the final headline shows the text in the desired formatted string.
 """
-print(create_article_text(articles[-1]))
+# print(create_article_text(articles[-1]))
+
+"""
+To apply the function and combine the features for each article, we use a list comprehension, calling our function on each article in articles.
+"""
+article_texts = [create_article_text(article) for article in articles]
+
+"""
+Finally, to embed these strings, we call the create_embedding function on the result. 
+"""
+article_embeddings = create_embedding(article_texts)
+
+"""
+Recall, that this creates a list of embeddings for each input using the OpenAI API.
+"""
+print(summarize_embeddings(article_embeddings))
+
+"""
+Now that we have ourt embeddings, it's time to compute cosine sistances
+"""
+
+# import numpy as np
+# from scipy.spatial.distance import cosine
+
+
+

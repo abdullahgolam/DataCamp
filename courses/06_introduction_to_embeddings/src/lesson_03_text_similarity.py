@@ -22,9 +22,7 @@ distance = distance.cosine([0, 1], [1, 0])
 - Smaller numbers = Greater similarity
 """
 
-from openai import OpenAI
-from common.config import OPENAI_API_KEY
-from common.helpers import summarize_embeddings
+from common.helpers import create_embedding, summarize_embeddings
 
 
 articles = [
@@ -40,17 +38,8 @@ articles = [
 {"headline": "1.5 Billion Tune-in to the World Cup Final", "topic": "Sport"}
 ]
 
-def create_embedding(text):
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=text
-    )
-    response_dict = response.model_dump()
-
-    return [data['embedding'] for data in response_dict['data']]
 """
-we define a custom function to send a request to the API, and extract and return embeddings from the response. This function can be called on a single string, or on a list of string and always returns a list of embeddings for the single string case, make sure to zero-index the function's result.
+create_embedding (now in common/helpers.py) is a custom function to send a request to the API, and extract and return embeddings from the response. This function can be called on a single string, or on a list of string and always returns a list of embeddings for the single string case, make sure to zero-index the function's result.
 """
 
 # pprint.pprint(summarize_embeddings(create_embedding(["Python is the best!", "R is the best!"])), sort_dicts=False)
