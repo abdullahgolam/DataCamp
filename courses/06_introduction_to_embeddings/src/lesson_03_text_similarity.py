@@ -22,7 +22,7 @@ distance = distance.cosine([0, 1], [1, 0])
 - Smaller numbers = Greater similarity
 """
 
-from common.helpers import create_embedding, summarize_embeddings
+from common.helpers import create_embeddings, summarize_embeddings
 
 
 articles = [
@@ -49,7 +49,7 @@ create_embedding (now in common/helpers.py) is a custom function to send a reque
 """
 embed all headlines in one request and store each embedding on its article
 """
-headline_embeddings = create_embedding([article["headline"] for article in articles])
+headline_embeddings = create_embeddings([article["headline"] for article in articles])
 for article, embedding in zip(articles, headline_embeddings):
     article["embedding"] = embedding
 
@@ -68,7 +68,7 @@ search_text = "computer"
 """
 we start by embedding this text using our create_embeddings custom function, remembering to zero-index the result
 """
-search_embedding = create_embedding(search_text)[0]
+search_embedding = create_embeddings(search_text)[0]
 
 """
 to find the most similar headline to this text, we'll loop over each article, calculating the cosin distance between each embedded headline and the embedded query, we start by creating an empty list to store our distances.
