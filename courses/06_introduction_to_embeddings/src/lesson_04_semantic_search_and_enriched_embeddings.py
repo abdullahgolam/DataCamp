@@ -21,7 +21,7 @@ articles = [
      "keywords": ["science", "innovation", "renewable"]},
     {"headline": "India Successfully Lands Near Moon's South Pole",
      "topic": "Science",
-     "keywords": ["space", "exploration", "india"]},
+     "keywords": ["space", "exploration", "india", "AI"]},
     {"headline": "New Particle Discovered at CERN",
      "topic": "Science",
      "keywords": ["physics", "research", "discovery"]},
@@ -43,7 +43,7 @@ articles = [
 ]
 
 from pprint import pprint
-from common.helpers import create_embedding, summarize_embeddings
+from common.helpers import create_embeddings, summarize_embeddings
 
 """
 we'll define a function called create_article_text, this function uses an F-string, or formatted string, to return the desired string structure. f-string allow us to insert variables into strings without having to convert them into strings and concatenate them. F-strings are created by specifying on f before the quotes, and note that we've defined a multi-line string using triple quotes. To insert an object, we use curly brackets and specify the variable or other Python code to insert. For the article headline and topic, these values are extracted using their keys and inserted into the string at the desired locations. The keywords are a little trickier because they were stored as a list rather than a string. To convert the keywords list into a string, we use the join list method, which joins the contents of the list together into a single string. The method is called on the string we want to delimit each keyword with, in this case, a comma and space. 
@@ -54,7 +54,6 @@ def create_article_text(article):
     Topic: {article['topic']}
     Keywords: {', '.join(article['keywords'])}
     """
-
 
 """
 Calling the function on the final headline shows the text in the desired formatted string.
@@ -69,19 +68,57 @@ article_texts = [create_article_text(article) for article in articles]
 """
 Finally, to embed these strings, we call the create_embedding function on the result. 
 """
-article_embeddings = create_embedding(article_texts)
+article_embeddings = create_embeddings(article_texts)
 
 """
 Recall, that this creates a list of embeddings for each input using the OpenAI API.
 """
-print(summarize_embeddings(article_embeddings))
+# pprint(summarize_embeddings(article_embeddings), sort_dicts=False)
 
 """
-Now that we have ourt embeddings, it's time to compute cosine sistances
+Now that we have our embeddings, it's time to compute cosine distances
 """
 
-# import numpy as np
-# from scipy.spatial.distance import cosine
+from scipy.spatial.distance import cosine
 
+"""
+We'll define a function called find_n_closest, that takes a query_vector, the embedded search query, and embeddings to compare against, our embedded articles, and returns the n most similar results based on their cosine distances.
+"""
+def find_n_closest(query_vector, embeddings, n=3):
+    distances = []
+    """
+    for each embedding, we calculate the cosine distance to the query_vector, and store it in a dictionary along with the embedding's index, which we append to a list called distances.
+    """
+    for index, embedding in enumerate(embeddings):
+        dist = cosine(query_vector, embedding)
+        distances.append({"distance": dist, "index": index})
+    """
+    To sort the distances list by the distance key in each dictionary, we use the sorted function and its key argument. The key argument takes a function to evaluate each dictionary in distances and sort by; in this case, it's a lambda function that accesses the distance kdy from each dictionary.
+    """
+    distances_sorted = sorted(distances, key=lambda x: x["distance"])
+    """
+    Finally, the function returns the closest n results.
+    """
+    return distances_sorted[0:n]
 
-
+"""
+Time to bring all the semantic search pleces together! We'll query our embeddings using the text, "AI".
+"""
+query_text = "AI"
+"""
+First, we embed the search query using our create_embeddings function and extract its embeddings by zero-indexing.
+"""
+query_vector = create_embeddings(query_text)[0]
+"""
+Next, we use the find_n_closest function to find the three closest hits based on our article_embeddings.
+"""
+hits = find_n_closest(query_vector, article_embeddings)
+"""
+Finally, to extract the most similar headlines, we loop through each hit, using the hit's index to subset the corresponding headline, and print.
+"""
+for hit in hits:
+    article = articles[hit['index']]
+    print(article['headline'])
+    """
+    As we'd expect, the top result specifically mentions AI, and the others are on similar topics.
+    """

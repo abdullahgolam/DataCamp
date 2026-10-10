@@ -25,7 +25,7 @@ def summarize_embeddings(data, head=1, tail=1):
     return data_copy
 
 
-def create_embedding(text):
+def create_embeddings(text):
     """Embeds a string or a list of strings and returns a list of embeddings.
 
     Always returns a list, so zero-index the result when embedding a single string.
