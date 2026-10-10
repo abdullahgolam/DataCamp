@@ -1,5 +1,9 @@
 import copy
 
+from openai import OpenAI
+
+from common.config import OPENAI_API_KEY
+
 
 def _shorten(emb, head, tail):
     return emb[:head] + ['...'] + emb[-tail:] if len(emb) > head + tail else emb
@@ -19,3 +23,18 @@ def summarize_embeddings(data, head=1, tail=1):
         elif isinstance(item, list):
             data_copy[i] = _shorten(item, head, tail)
     return data_copy
+
+
+def create_embedding(text):
+    """Embeds a string or a list of strings and returns a list of embeddings.
+
+    Always returns a list, so zero-index the result when embedding a single string.
+    """
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=text
+    )
+    response_dict = response.model_dump()
+
+    return [data['embedding'] for data in response_dict['data']]
