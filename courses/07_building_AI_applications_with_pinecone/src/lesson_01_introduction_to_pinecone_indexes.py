@@ -34,3 +34,24 @@ In pod-based indexes, we choose one or more pre-configured units of hardware, ca
             - Run on cloud and store in blob
             - Easier to user and often lower cost
 """
+
+from pinecone import Pinecone, ServerlessSpec
+from common.config import PINECONE_API_KEY
+
+
+"""
+The first step to working with Pinecone in Python is to import the Pinecone API client. This client is used to configure the environment to work with the API.
+Including specifying the API key. We also import ServerlessSpec, which is used for creating a serverless index. To create the index, we call the .create_index() method on the client and specify what we should name the index. When creating an index, we also need to specify the dimensionality of the vectors it will store; this index can store vectors represented by 1536 numbers.
+Finally, we indicate we want to create a serverless index by passing the ServerlessSpec function to the spec argument.
+Inside, we specify the cloud provider and region we wish to store the indexes in. 
+"""
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+pc.create_index(
+    name="datacamp-index",
+    dimension=1536,
+    spec=ServerlessSpec(
+        cloud="aws",
+        region="us-east-1",
+    )
+)
