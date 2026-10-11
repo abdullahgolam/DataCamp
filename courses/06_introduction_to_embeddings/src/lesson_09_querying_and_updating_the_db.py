@@ -1,6 +1,6 @@
 """
 Querying and updating the database
-    - Create a collection named netflix_titles for the titles in Data/netflix_titles_1000.csv
+    - Create a collection named netflix_titles for the titles in data/netflix_titles_1000.csv
 """
 from pathlib import Path
 
@@ -9,7 +9,7 @@ import pandas as pd
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from common.config import OPENAI_API_KEY
 
-DATA_PATH = Path(__file__).resolve().parent.parent / "Data" / "netflix_titles_1000.csv"
+DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "netflix_titles_1000.csv"
 
 client = chromadb.PersistentClient(path=r'D:\chromadb')
 
