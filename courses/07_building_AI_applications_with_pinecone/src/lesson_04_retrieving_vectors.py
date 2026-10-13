@@ -13,9 +13,9 @@ Accessing vectors:
 Fetching vectors
     To fetch records based on their IDs, we can call the .fetch() method, passing it a list of record IDs to return. 
 """
-# index.fetch(
-#     ids=['0', '1']
-# )
+index.fetch(
+    ids=['0', '1']
+)
 """
 {'namespace': '',
 'usage': {'read_units': 1},
@@ -39,10 +39,10 @@ Read units:
 Fetching vectors from namespaces
     We can also fetch vectors from specific namespaces by specifying the namespace argument
 """
-# index.fetch(
-#     ids=['0', '1']
-#     namespace='namespace1'
-# )
+index.fetch(
+    ids=['0', '1'],
+    namespace='namespace1'
+)
 """
 {'namespace': 'namespace1',
 'usage': {'read_units': 1},
