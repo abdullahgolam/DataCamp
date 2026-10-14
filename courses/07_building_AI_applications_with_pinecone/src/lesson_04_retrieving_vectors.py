@@ -1,3 +1,10 @@
+from common.config import PINECONE_API_KEY
+from pinecone import Pinecone
+
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+index = pc.Index(name="datacamp-index")
+
 """
 Accessing vectors:
     There are two main methods for accessing vectors from a pinecone vector database: Fetching and querying.

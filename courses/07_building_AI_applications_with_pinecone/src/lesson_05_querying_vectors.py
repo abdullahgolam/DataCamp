@@ -1,3 +1,12 @@
+from common.config import PINECONE_API_KEY
+from pinecone import Pinecone, ServerlessSpec
+
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+index = pc.Index(name="datacamp-index")
+
+vector = []
+
 """
 Querying vectors:
     Querying: receive the most semantically similar vectors to an input vector.
@@ -10,7 +19,7 @@ Querying vectors:
 We can use the .query() method to query the index. We need to pass it a vector to query it with, and the top_k argument, which is the number of results to return the top_k most similar vectors. As with other index methods, the query vector will need to have the same dimensionality as the index and other vectors in the index.
 """
 index.query(
-    vector=[-0.25919762305275, ...]
+    vector=vector
 )
 
 """
@@ -27,7 +36,7 @@ The output shows te IDs of the records with the most similar vectors. Each recor
 To return the vector values in the output, set the include_values argument to True. 
 """
 index.query(
-    vector=[-0.250919762305275, ...],
+    vector=vector,
     top_k=3,
     include_values=True
 )
