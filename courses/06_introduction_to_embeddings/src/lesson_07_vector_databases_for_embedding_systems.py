@@ -30,7 +30,7 @@ Which solution is best?
     - Open source or commercial?
         - Open source -> flexible and cost-effective
         - Commercial -> better support, more advanced features, and compliance
-    - Data models: does the type of data lend itself to a particular database type?
+    - data models: does the type of data lend itself to a particular database type?
     - Specific features: does your use case depend on specific functionality, such as multi-modal storage?
 
 In this course we'll be using Chroma, as it's open-source and quick to set up.

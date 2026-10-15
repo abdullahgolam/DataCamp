@@ -40,7 +40,7 @@ This code to load the CSV file by creating a list to store the metadata, and pop
 """
 import csv
 # from pathlib import Path
-# DATA_PATH = Path(__file__).resolve().parent.parent / "Data" / "netflix_titles_1000.csv"
+# DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "netflix_titles_1000.csv"
 
 # ids = []
 # metadatas = []
