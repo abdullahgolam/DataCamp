@@ -2,7 +2,7 @@ from pypdf import PdfReader
 from transformers import pipeline
 
 # Load the PDF file
-reader = PdfReader("courses/03_working_with_hugging_face/docs/chapter2.pdf")
+reader = PdfReader("courses/course_03_working_with_hugging_face/docs/chapter2.pdf")
 
 document_text = ""
 for page in reader.pages:

@@ -30,7 +30,7 @@ Queries and other manipulations are then limited to that namespace. For now, we'
     In Summary:
         - Containers for partitioning indexes
             - Separate datasets
-            - Data versioning
+            - data versioning
             - Separate groups
 """
 
