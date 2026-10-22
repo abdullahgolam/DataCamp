@@ -1,4 +1,5 @@
 import copy
+import json
 
 from openai import OpenAI
 
@@ -38,3 +39,21 @@ def create_embeddings(text):
     response_dict = response.model_dump()
 
     return [data['embedding'] for data in response_dict['data']]
+
+
+def print_llm_output(output):
+    """Prints a chat model response (e.g. ChatOpenAI invoke result) as readable JSON.
+
+    Shows the message content plus key metadata: model name and token usage.
+    """
+    usage = output.usage_metadata or {}
+    result = {
+        "content": output.content,
+        "model": output.response_metadata.get("model_name", "unknown"),
+        "tokens": {
+            "input": usage.get("input_tokens"),
+            "output": usage.get("output_tokens"),
+            "total": usage.get("total_tokens"),
+        },
+    }
+    print(json.dumps(result, indent=2, ensure_ascii=False))
